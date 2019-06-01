@@ -4,7 +4,8 @@
   "scripts": {
     "clean": "lerna clean --yes; rm -rf ./packages/jupiter-web/.cache",
     "install": "lerna bootstrap && lerna link",
-    "prettify": "prettier --write \"**/*.*\""
+    "prettify": "prettier --write \"**/*.*\"",
+    "build": "lerna run --scope jupiter-integration-zeit build"
   },
   "devDependencies": {
     "husky": "^2.3.0",
