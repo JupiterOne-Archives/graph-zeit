@@ -1,9 +1,9 @@
 {
-  "name": "@jupiterone/managed-integration-example",
-  "version": "0.1.0",
-  "description": "An example JupiterOne managed integration.",
+  "name": "@jupiterone/jupiter-integration-zeit",
+  "version": "0.1.1",
+  "description": "An integration for Zeit",
   "main": "dist/index.js",
-  "repository": "https://github.com/JupiterOne/managed-integration-example",
+  "repository": "https://github.com/JupiterOne/jupiter-integration-zeit",
   "license": "SEE LICENSE IN LICENSE",
   "files": [
     "LICENSE",
@@ -27,7 +27,6 @@
     "format": "yarn prettier --write '**/*.{ts,js,json,md}'",
     "test": "jest"
   },
-  "dependencies": {},
   "peerDependencies": {
     "@jupiterone/jupiter-managed-integration-sdk": "^23.0.2"
   },
@@ -55,5 +54,6 @@
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.5"
-  }
+  },
+  "gitHead": "906534a340a5508be0351dfd86fc5d91c43dea18"
 }
