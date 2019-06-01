@@ -9,33 +9,12 @@ export interface User {
   lastName: string;
 }
 
-export interface Device {
-  id: string;
-  manufacturer: string;
-  ownerId: string;
-}
-
 export default class ProviderClient {
   public async fetchAccountDetails(): Promise<Account> {
     return {
       id: 'account-a',
       name: 'Account A'
     };
-  }
-
-  public async fetchDevices(): Promise<Device[]> {
-    return [
-      {
-        id: 'device-a',
-        manufacturer: 'Manufacturer A',
-        ownerId: 'user-a'
-      },
-      {
-        id: 'device-b',
-        manufacturer: 'Manufacturer B',
-        ownerId: 'user-b'
-      }
-    ];
   }
 
   public async fetchUsers(): Promise<User[]> {
