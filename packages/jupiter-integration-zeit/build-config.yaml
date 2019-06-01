@@ -1,0 +1,6 @@
+---
+dockerImages:
+  - name: jupiter-integration-zeit
+    dockerfile: deploy/Dockerfile
+    baseDir: .
+    usageTarget: deploy

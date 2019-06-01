@@ -1,17 +1,17 @@
-const { defaults } = require("jest-config");
+const { defaults } = require('jest-config');
 
 module.exports = {
   transform: {
-    "^.+\\.ts?$": "ts-jest",
+    '^.+\\.ts?$': 'ts-jest'
   },
-  testMatch: ["<rootDir>/src/**/*.test.{js,ts}"],
+  testMatch: ['<rootDir>/src/**/*.test.{js,ts}'],
   collectCoverageFrom: [
-    "src/**/*.ts",
-    "!src/index.ts",
-    "!src/ProviderClient.ts",
+    'src/**/*.ts',
+    '!src/index.ts',
+    '!src/ProviderClient.ts'
   ],
-  moduleFileExtensions: [...defaults.moduleFileExtensions, "ts"],
-  testEnvironment: "node",
+  moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts'],
+  testEnvironment: 'node',
   clearMocks: true,
   collectCoverage: true,
   coverageThreshold: {
@@ -19,7 +19,7 @@ module.exports = {
       statements: 100,
       branches: 100,
       functions: 100,
-      lines: 100,
-    },
-  },
+      lines: 100
+    }
+  }
 };

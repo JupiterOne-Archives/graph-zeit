@@ -1,0 +1,41 @@
+Arguments: 
+  /home/charlie/.fnm/node-versions/v8.10.0/installation/bin/node /usr/share/yarn/bin/yarn.js
+
+PATH: 
+  /tmp/fnm-shell-7040899/bin:/home/charlie/.fnm:/home/charlie/.cargo/bin:/home/charlie/.cargo/.bin:/Users/charlieduong/Documents/home/projects/golang/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/charlie/.antigen/bundles/robbyrussell/oh-my-zsh/lib:/home/charlie/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/git:/home/charlie/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/lein:/home/charlie/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/command-not-found:/home/charlie/.antigen/bundles/zsh-users/zsh-syntax-highlighting:/home/charlie/.antigen/bundles/mafredri/zsh-async:/home/charlie/.antigen/bundles/sindresorhus/pure
+
+Yarn version: 
+  1.16.0
+
+Node version: 
+  8.10.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /home/charlie/projects/private/jupiter-integration-zeit/package.json: Unexpected string in JSON at position 160
+      at JSON.parse (<anonymous>)
+      at /usr/share/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:304:30)
+      at /usr/share/yarn/lib/cli.js:315:13
+      at <anonymous>
+
+npm manifest: 
+  {
+    "name": "root",
+    "scripts": {
+      "clean": "lerna clean --yes; rm -rf ./packages/jupiter-web/.cache",
+      "install": "lerna bootstrap && lerna link"
+    }
+    "devDependencies": {
+      "lerna": "^3.14.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

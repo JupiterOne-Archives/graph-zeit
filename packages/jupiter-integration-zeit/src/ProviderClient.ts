@@ -18,38 +18,38 @@ export interface Device {
 export default class ProviderClient {
   public async fetchAccountDetails(): Promise<Account> {
     return {
-      id: "account-a",
-      name: "Account A",
+      id: 'account-a',
+      name: 'Account A'
     };
   }
 
   public async fetchDevices(): Promise<Device[]> {
     return [
       {
-        id: "device-a",
-        manufacturer: "Manufacturer A",
-        ownerId: "user-a",
+        id: 'device-a',
+        manufacturer: 'Manufacturer A',
+        ownerId: 'user-a'
       },
       {
-        id: "device-b",
-        manufacturer: "Manufacturer B",
-        ownerId: "user-b",
-      },
+        id: 'device-b',
+        manufacturer: 'Manufacturer B',
+        ownerId: 'user-b'
+      }
     ];
   }
 
   public async fetchUsers(): Promise<User[]> {
     return [
       {
-        firstName: "User",
-        id: "user-a",
-        lastName: "A",
+        firstName: 'User',
+        id: 'user-a',
+        lastName: 'A'
       },
       {
-        firstName: "User",
-        id: "user-b",
-        lastName: "B",
-      },
+        firstName: 'User',
+        id: 'user-b',
+        lastName: 'B'
+      }
     ];
   }
 }

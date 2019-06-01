@@ -1,4 +1,4 @@
-import { IntegrationValidationContext } from "@jupiterone/jupiter-managed-integration-sdk";
+import { IntegrationValidationContext } from '@jupiterone/jupiter-managed-integration-sdk';
 
 /**
  * Performs validation of the execution before the execution handler function is
@@ -16,7 +16,7 @@ import { IntegrationValidationContext } from "@jupiterone/jupiter-managed-integr
  * @param context
  */
 export default async function invocationValidator(
-  context: IntegrationValidationContext,
+  context: IntegrationValidationContext
 ) {
   // const { config } = context.instance;
   // if (!config.providerAPIKey) {
