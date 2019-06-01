@@ -27,7 +27,6 @@
     "format": "yarn prettier --write '**/*.{ts,js,json,md}'",
     "test": "jest"
   },
-  "dependencies": {},
   "peerDependencies": {
     "@jupiterone/jupiter-managed-integration-sdk": "^23.0.2"
   },
