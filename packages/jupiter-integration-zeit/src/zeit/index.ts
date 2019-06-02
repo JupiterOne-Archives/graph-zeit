@@ -127,6 +127,6 @@ export async function fetchZeitData(provider: ZeitClient) {
     relationships: {
       userTeamRelationships,
       projectDeploymentRelationships,
-    }
+    },
   };
 }

@@ -5,13 +5,9 @@ import {
   RelationshipFromIntegration,
   EntityOperation,
   RelationshipOperation,
-} from '@jupiterone/jupiter-managed-integration-sdk';
+} from "@jupiterone/jupiter-managed-integration-sdk";
 
-import {
-  ZeitIntegrationData,
-  ZeitEntities,
-  ZeitRelationships
-} from '../types';
+import { ZeitIntegrationData, ZeitEntities, ZeitRelationships } from "../types";
 
 import {
   // Project
@@ -39,12 +35,12 @@ import {
   // Domain
   DomainEntity,
   DOMAIN_ENTITY_TYPE,
-} from './types';
+} from "./types";
 
 export * from "./types";
 
-export async function fetchExistingZeitData (
-  graph: GraphClient
+export async function fetchExistingZeitData(
+  graph: GraphClient,
 ): Promise<ZeitIntegrationData> {
   // entities
   const [
@@ -53,7 +49,7 @@ export async function fetchExistingZeitData (
     users,
     domains,
     certificates,
-    deployments
+    deployments,
   ] = await Promise.all([
     graph.findEntitiesByType<ProjectEntity>(PROJECT_ENTITY_TYPE),
     graph.findEntitiesByType<TeamEntity>(TEAM_ENTITY_TYPE),
@@ -61,17 +57,23 @@ export async function fetchExistingZeitData (
     graph.findEntitiesByType<DomainEntity>(DOMAIN_ENTITY_TYPE),
     graph.findEntitiesByType<CertificateEntity>(CERTIFICATE_ENTITY_TYPE),
     graph.findEntitiesByType<DeploymentEntity>(DEPLOYMENT_ENTITY_TYPE),
-  ])
+  ]);
 
   // relationships
   const [
     userTeamOwnerRelationships,
     userTeamMemberRelationships,
-    projectDeploymentRelationships
+    projectDeploymentRelationships,
   ] = await Promise.all([
-    graph.findRelationshipsByType<UserTeamRelationship>(USER_TEAM_OWNER_RELATIONSHIP_TYPE),
-    graph.findRelationshipsByType<UserTeamRelationship>(USER_TEAM_MEMBER_RELATIONSHIP_TYPE),
-    graph.findRelationshipsByType<ProjectDeploymentRelationship>(PROJECT_DEPLOYMENT_RELATIONSHIP_TYPE),
+    graph.findRelationshipsByType<UserTeamRelationship>(
+      USER_TEAM_OWNER_RELATIONSHIP_TYPE,
+    ),
+    graph.findRelationshipsByType<UserTeamRelationship>(
+      USER_TEAM_MEMBER_RELATIONSHIP_TYPE,
+    ),
+    graph.findRelationshipsByType<ProjectDeploymentRelationship>(
+      PROJECT_DEPLOYMENT_RELATIONSHIP_TYPE,
+    ),
   ]);
 
   return {
@@ -81,23 +83,26 @@ export async function fetchExistingZeitData (
       users,
       domains,
       certificates,
-      deployments
+      deployments,
     },
     relationships: {
-      userTeamRelationships: [ ...userTeamOwnerRelationships, ...userTeamMemberRelationships ],
-      projectDeploymentRelationships
-    }
-  }
+      userTeamRelationships: [
+        ...userTeamOwnerRelationships,
+        ...userTeamMemberRelationships,
+      ],
+      projectDeploymentRelationships,
+    },
+  };
 }
 
 export const buildEntityOperations = (
   oldData: ZeitEntities,
   newData: ZeitEntities,
-  persister: PersisterClient
+  persister: PersisterClient,
 ): EntityOperation[] =>
-  [
-    ...new Set([...Object.keys(oldData), ...Object.keys(newData)])
-  ].reduce<EntityOperation[]>((operations, entityKey) => {
+  [...new Set([...Object.keys(oldData), ...Object.keys(newData)])].reduce<
+    EntityOperation[]
+  >((operations, entityKey) => {
     const oldEntities = (oldData as any)[entityKey] || [];
     const newEntities = (newData as any)[entityKey] || [];
 
@@ -105,19 +110,19 @@ export const buildEntityOperations = (
       ...operations,
       ...persister.processEntities<EntityFromIntegration>(
         oldEntities,
-        newEntities
-      )
-    ]
+        newEntities,
+      ),
+    ];
   }, []);
 
 export const buildRelationshipOperations = (
   oldData: ZeitRelationships,
   newData: ZeitRelationships,
-  persister: PersisterClient
+  persister: PersisterClient,
 ): RelationshipOperation[] =>
-  [
-    ...new Set([...Object.keys(oldData), ...Object.keys(newData)])
-  ].reduce<RelationshipOperation[]>((operations, relationshipKey) => {
+  [...new Set([...Object.keys(oldData), ...Object.keys(newData)])].reduce<
+    RelationshipOperation[]
+  >((operations, relationshipKey) => {
     const oldRelationships = (oldData as any)[relationshipKey] || [];
     const newRelationships = (newData as any)[relationshipKey] || [];
 
@@ -125,7 +130,7 @@ export const buildRelationshipOperations = (
       ...operations,
       ...persister.processRelationships<RelationshipFromIntegration>(
         oldRelationships,
-        newRelationships
-      )
-    ]
+        newRelationships,
+      ),
+    ];
   }, []);
