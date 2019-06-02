@@ -14,6 +14,7 @@ import {
   DeploymentEntity,
   CertificateEntity,
   DomainEntity,
+  ProjectDeploymentRelationship,
 } from "./jupiterone";
 
 export interface ZeitExecutionContext extends IntegrationExecutionContext {
@@ -22,14 +23,21 @@ export interface ZeitExecutionContext extends IntegrationExecutionContext {
   provider: ZeitClient;
 }
 
-export interface ZeitIntegrationData {
+export interface ZeitEntities {
   projects: ProjectEntity[];
-
   teams: TeamEntity[];
   users: UserEntity[];
-  userTeamRelationships: UserTeamRelationship[];
-
   domains: DomainEntity[];
   certificates: CertificateEntity[];
   deployments: DeploymentEntity[];
+}
+
+export interface ZeitRelationships {
+  userTeamRelationships: UserTeamRelationship[];
+  projectDeploymentRelationships: ProjectDeploymentRelationship[];
+}
+
+export interface ZeitIntegrationData {
+  entities: ZeitEntities;
+  relationships: ZeitRelationships;
 }
