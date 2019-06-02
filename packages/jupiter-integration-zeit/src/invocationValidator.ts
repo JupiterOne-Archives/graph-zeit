@@ -1,4 +1,12 @@
-import { IntegrationValidationContext } from '@jupiterone/jupiter-managed-integration-sdk';
+import {
+  IntegrationValidationContext,
+  IntegrationInstanceAuthenticationError,
+  IntegrationInstanceConfigError
+} from '@jupiterone/jupiter-managed-integration-sdk';
+
+import { ZeitClient } from './zeit';
+
+const configApiTokenKey = 'zeitApiToken';
 
 /**
  * Performs validation of the execution before the execution handler function is
@@ -18,13 +26,17 @@ import { IntegrationValidationContext } from '@jupiterone/jupiter-managed-integr
 export default async function invocationValidator(
   context: IntegrationValidationContext
 ) {
-  // const { config } = context.instance;
-  // if (!config.providerAPIKey) {
-  //   throw new IntegrationInstanceConfigError('providerAPIKey missing in config');
-  // }
-  // try {
-  //   new ProviderClient(config.providerAPIKey).someEndpoint();
-  // } catch (err) {
-  //   throw new IntegrationInstanceAuthenticationError(err);
-  // }
+  const { config } = context.instance;
+
+  const apiToken = config[configApiTokenKey];
+
+  if (!apiToken) {
+    throw new IntegrationInstanceConfigError(`"${configApiTokenKey}" missing in config`);
+  }
+
+  try {
+    await new ZeitClient(apiToken).listProjects();
+  } catch (err) {
+    throw new IntegrationInstanceAuthenticationError(err);
+  }
 }

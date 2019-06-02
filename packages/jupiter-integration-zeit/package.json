@@ -1,31 +1,31 @@
 {
   "name": "@jupiterone/jupiter-integration-zeit",
-  "version": "0.1.2",
   "description": "An integration for Zeit",
-  "main": "dist/index.js",
-  "repository": "https://github.com/JupiterOne/jupiter-integration-zeit",
   "license": "SEE LICENSE IN LICENSE",
+  "repository": "https://github.com/JupiterOne/jupiter-integration-zeit",
+  "version": "0.1.2",
+  "main": "dist/index.js",
   "files": [
-    "LICENSE",
     "dist"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
-    "start": "ts-node --require dotenv/config tools/execute.ts | bunyan",
-    "start:graph": "docker run -d --rm --name jupiterone-local-graph -p 8182:8182 tinkerpop/gremlin-server:3.3",
-    "stop:graph": "docker stop jupiterone-local-graph",
     "prebuild": "yarn test",
     "build": "rm -rf dist/* && yarn build:types && yarn build:src && yarn build:docs",
-    "build:src": "babel src --extensions '.ts' --out-dir dist",
     "build:docs": "ts-node tools/docs.ts",
+    "build:src": "babel src --extensions '.ts' --out-dir dist",
     "build:types": "tsc --project tsconfig.dist.json --declaration --emitDeclarationOnly",
+    "format": "yarn prettier --write '**/*.{ts,js,json,md}'",
     "lint": "yarn lint:ts && yarn lint:md",
     "lint:md": "remark .",
     "lint:ts": "tslint --project .",
-    "format": "yarn prettier --write '**/*.{ts,js,json,md}'",
+    "start": "ts-node --require dotenv/config tools/execute.ts | bunyan",
+    "start:graph": "docker run -d --rm --name jupiterone-local-graph -p 8182:8182 tinkerpop/gremlin-server:3.3",
+    "stop:graph": "docker stop jupiterone-local-graph",
     "test": "jest"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "p-queue": "^5.0.0"
   },
   "peerDependencies": {
     "@jupiterone/jupiter-managed-integration-sdk": "^23.0.2"
@@ -42,6 +42,7 @@
     "@types/fs-extra": "^7.0.0",
     "@types/jest": "^24.0.0",
     "@types/node": "~8.10.0",
+    "@types/node-fetch": "^2.3.4",
     "bunyan": "^1.8.12",
     "dotenv": "^8.0.0",
     "jest": "^24.0.0",
@@ -54,6 +55,9 @@
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.5"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "gitHead": "906534a340a5508be0351dfd86fc5d91c43dea18"
 }
