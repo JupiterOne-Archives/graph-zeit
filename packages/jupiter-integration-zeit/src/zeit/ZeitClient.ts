@@ -1,33 +1,41 @@
-import fetch, { RequestInit, Response } from 'node-fetch';
+import fetch, { RequestInit, Response } from "node-fetch";
 
 // NOTE: not using import here because of type issue
-const PQueue = require('p-queue')
+const PQueue = require("p-queue");
 
 import {
-  ProjectsResponse
-} from './types';
+  ProjectsResponse,
+  TeamsResponse,
+  TeamMembersResponse,
+  DeploymentResponse,
+  ListDeployments_deployment,
+  ListDeploymentsResponse,
+  CertificatesResponse,
+  DomainsResponse,
+  FullDeploymentsResult,
+} from "./types";
 
 enum Method {
-  GET = 'get',
-  POST = 'post'
+  GET = "get",
+  POST = "post",
 }
 
-const ZEIT_API_ORIGIN = 'https://api.zeit.co';
+const ZEIT_API_ORIGIN = "https://api.zeit.co";
 
 export default class ZeitClient {
   private readonly queue: any;
 
-  constructor (private readonly apiToken: string) {
+  constructor(private readonly apiToken: string) {
     this.queue = new PQueue({
       concurrency: 1,
       intervalCap: 1,
-      interval: 50
+      interval: 50,
     });
   }
 
   private async makeRequest<T>(
-    url: string,
-    method: Method,
+    path: string,
+    method: Method = Method.GET,
     params: {} = {},
     headers?: {},
   ): Promise<T> {
@@ -42,12 +50,11 @@ export default class ZeitClient {
     };
 
     let response: Response | undefined;
+    const url = `${ZEIT_API_ORIGIN}${path}`;
+
     try {
       await this.queue.add(async () => {
-        response = await fetch(
-          `${ZEIT_API_ORIGIN}/${url}`,
-          options,
-        );
+        response = await fetch(url, options);
       });
     } catch (err) {
       if (err.code === "ETIMEDOUT") {
@@ -58,7 +65,9 @@ export default class ZeitClient {
         throw error;
       } else if (err.code === "ESOCKETTIMEDOUT") {
         const error = new Error(
-          `Established connection to ${ZEIT_API_ORIGIN} timed out (${err.code})`,
+          `Established connection to ${ZEIT_API_ORIGIN} timed out (${
+            err.code
+          })`,
         ) as any;
         error.code = err.code;
         throw error;
@@ -78,16 +87,56 @@ export default class ZeitClient {
       const err = new Error(response.statusText) as any;
       err.code = "UnexpectedStatusCode";
       err.statusCode = response.status;
+      err.url = url;
       throw err;
     }
   }
 
-  // add functions for fetching data here
+  /**
+   * Add functions for fetching data here
+   */
+
   public listProjects(): Promise<ProjectsResponse> {
-    return this.makeRequest(
-      '/v1/projects/list',
-      Method.GET
-    );
+    return this.makeRequest("/v1/projects/list");
   }
 
+  public async listDeployments(
+    projectId: string,
+  ): Promise<FullDeploymentsResult> {
+    // TODO: handling paging
+    const { deployments } = await this.makeRequest<ListDeploymentsResponse>(
+      `/v4/now/deployments?projectId=${projectId}`,
+    );
+
+    // NOTE: this is potentially a lot of requests and data, we will need to
+    // spread this out over a longer period of time
+    //
+    // There can be a ton of deployments, so we should might also want
+    // to filter out some of them after a certain period of time
+    // or only list out active ones
+
+    return {
+      deployments: await Promise.all(
+        deployments.map(({ uid }: ListDeployments_deployment) =>
+          this.makeRequest<DeploymentResponse>(`/v9/now/deployments/${uid}`),
+        ),
+      ),
+    };
+  }
+
+  public listTeams(): Promise<TeamsResponse> {
+    return this.makeRequest("/v1/teams");
+  }
+
+  public listTeamMembers(teamId: string): Promise<TeamMembersResponse> {
+    return this.makeRequest(`/v1/teams/${teamId}/members`);
+  }
+
+  public listCertificates(): Promise<CertificatesResponse> {
+    return this.makeRequest("/v3/now/certs");
+  }
+
+  public listDomains(): Promise<DomainsResponse> {
+    return this.makeRequest("/v4/domains");
+  }
 }

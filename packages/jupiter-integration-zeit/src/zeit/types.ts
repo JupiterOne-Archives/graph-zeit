@@ -29,9 +29,16 @@ export interface TeamsResponse {
 /**
  * Team Member
  */
-export interface TeamMember { // this is the closest thing we have to users
+
+export enum TeamMemberRole {
+  OWNER = "OWNER",
+  MEMBER = "MEMBER",
+}
+
+export interface TeamMember {
+  // this is the closest thing we have to users
   uid: string; // userId
-  role: string; // role can be used to select relationship class
+  role: TeamMemberRole; // role can be used to select relationship class
   email: string;
   username: string;
 }
@@ -55,7 +62,18 @@ export interface Deployment {
   // figure out best way to store environment variables
 }
 
-export interface DeploymentsResponse {
+export interface ListDeployments_deployment {
+  uid: string;
+  // there's more but for now this is all we care about
+}
+
+export interface ListDeploymentsResponse {
+  deployments: ListDeployments_deployment[];
+}
+
+export type DeploymentResponse = Deployment;
+
+export interface FullDeploymentsResult {
   deployments: Deployment[];
 }
 
@@ -63,7 +81,7 @@ export interface DeploymentsResponse {
  * Certificate
  */
 export interface Certificate {
-  cns: string[];
+  cns: string[]; // common names
   uid: string;
   created: string;
   expiration: string;
@@ -73,7 +91,6 @@ export interface Certificate {
 export interface CertificatesResponse {
   certs: Certificate[];
 }
-
 
 /**
  * Domain
@@ -85,7 +102,7 @@ export interface Domain {
   cdnEnabled: boolean;
 
   createdAt: number;
-  nsVerfiedAt: number | null;
+  nsVerifiedAt: number | null;
   txtVerifiedAt: number | null;
   boughtAt: number | null;
   transferredAt: number | null;
@@ -102,7 +119,7 @@ export interface Domain {
     id: string;
     username: string;
     email: string;
-  }
+  };
 }
 
 export interface DomainsResponse {

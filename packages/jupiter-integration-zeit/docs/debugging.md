@@ -53,4 +53,5 @@ debugging Jest tests][2].
 ```
 
 [1]: https://code.visualstudio.com/docs/typescript/typescript-debugging
-[2]: https://github.com/Microsoft/vscode-recipes/tree/master/debugging-jest-tests
+[2]:
+  https://github.com/Microsoft/vscode-recipes/tree/master/debugging-jest-tests

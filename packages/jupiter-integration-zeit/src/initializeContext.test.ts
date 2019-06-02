@@ -1,13 +1,13 @@
-import { createTestIntegrationExecutionContext } from '@jupiterone/jupiter-managed-integration-sdk';
-import initializeContext from './initializeContext';
+import { createTestIntegrationExecutionContext } from "@jupiterone/jupiter-managed-integration-sdk";
+import initializeContext from "./initializeContext";
 
-test('creates provider client', () => {
+test("creates provider client", () => {
   const executionContext = createTestIntegrationExecutionContext({
     instance: {
       config: {
-        zeitApiToken: 'blah'
-      }
-    }
+        zeitApiToken: "blah",
+      },
+    },
   });
 
   const integrationContext = initializeContext(executionContext);

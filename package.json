@@ -20,5 +20,31 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "prettier": {
+    "trailingComma": "all",
+    "proseWrap": "always"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.md": [
+        "remark .",
+        "prettier --write",
+        "git add"
+      ],
+      "*.ts": [
+        "tslint --project .",
+        "prettier --write",
+        "git add"
+      ],
+      "*.{js,json}": [
+        "prettier --write",
+        "git add"
+      ]
+    },
+    "ignore": []
+  },
+  "hooks": {
+    "pre-commit": "lint-staged"
+  }
 }
