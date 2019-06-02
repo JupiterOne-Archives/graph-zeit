@@ -3,12 +3,10 @@ import { executeIntegrationLocal } from '@jupiterone/jupiter-managed-integration
 import invocationConfig from '../src/index';
 
 const integrationConfig = {
-  // providerApiToken: process.env.PROVIDER_LOCAL_EXECUTION_API_TOKEN
+  zeitApiToken: process.env.ZEIT_API_TOKEN
 };
 
-const invocationArgs = {
-  // providerPrivateKey: process.env.PROVIDER_LOCAL_EXECUTION_PRIVATE_KEY
-};
+const invocationArgs = {};
 
 executeIntegrationLocal(
   integrationConfig,

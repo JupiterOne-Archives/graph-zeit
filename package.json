@@ -20,8 +20,5 @@
   },
   "workspaces": [
     "packages/*"
-  ],
-  "dependencies": {
-    "@lifeomic/typescript-tools": "^5.0.0"
-  }
+  ]
 }

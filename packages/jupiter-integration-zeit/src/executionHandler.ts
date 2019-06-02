@@ -3,33 +3,19 @@ import {
   IntegrationExecutionResult
 } from '@jupiterone/jupiter-managed-integration-sdk';
 
-/*
-import {
-  createAccountEntity,
-  createAccountRelationships,
-  createUserEntities
-} from './converters';
-*/
+import { ZeitClient } from './zeit'
 
+import { createProjectEntities } from './converters';
 import initializeContext from './initializeContext';
-// import ProviderClient from './ProviderClient';
 
-/*
-import {
-  ACCOUNT_ENTITY_TYPE,
-  ACCOUNT_USER_RELATIONSHIP_TYPE,
-  AccountEntity,
-  USER_ENTITY_TYPE,
-  UserEntity
-} from './types';
-*/
+import { ProjectEntity } from './types';
 
 export default async function executionHandler(
   context: IntegrationExecutionContext
 ): Promise<IntegrationExecutionResult> {
-  const {
-    /*graph, , persister, provider*/
-  } = initializeContext(context);
+  const { /*graph, persister,*/ provider } = initializeContext(context);
+
+  console.log(await fetchUserEntitiesFromProvider(provider));
 
   return {
     operations: {
@@ -42,10 +28,8 @@ export default async function executionHandler(
   };
 }
 
-/*
 async function fetchUserEntitiesFromProvider(
-  provider: ProviderClient
-): Promise<UserEntity[]> {
-  return createUserEntities(await provider.fetchUsers());
+  provider: ZeitClient
+): Promise<ProjectEntity[]> {
+  return createProjectEntities(await provider.listProjects());
 }
-*/

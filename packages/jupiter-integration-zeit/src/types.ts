@@ -4,25 +4,20 @@ import {
   IntegrationExecutionContext,
   PersisterClient
 } from '@jupiterone/jupiter-managed-integration-sdk';
-import ProviderClient from './ProviderClient';
 
-export const ACCOUNT_ENTITY_TYPE = 'zeit_account';
-export const ACCOUNT_ENTITY_CLASS = 'Account';
+import { ZeitClient } from './zeit';
 
-export const USER_ENTITY_TYPE = 'zeit_user';
-export const USER_ENTITY_CLASS = 'User';
-export const ACCOUNT_USER_RELATIONSHIP_TYPE = 'zeit_account_user';
+export const PROJECT_ENTITY_TYPE = 'zeit_project'
+export const PROJECT_ENTITY_CLASS = 'Project';
 
-export interface AccountEntity extends EntityFromIntegration {
-  accountId: string;
-}
-
-export interface UserEntity extends EntityFromIntegration {
-  userId: string;
+export interface ProjectEntity extends EntityFromIntegration {
+  projectId: string;
+  createdAt: number;
+  updatedAt: number;
 }
 
 export interface ZeitExecutionContext extends IntegrationExecutionContext {
   graph: GraphClient;
   persister: PersisterClient;
-  provider: ProviderClient;
+  provider: ZeitClient;
 }

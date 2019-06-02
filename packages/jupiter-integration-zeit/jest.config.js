@@ -7,8 +7,7 @@ module.exports = {
   testMatch: ['<rootDir>/src/**/*.test.{js,ts}'],
   collectCoverageFrom: [
     'src/**/*.ts',
-    '!src/index.ts',
-    '!src/ProviderClient.ts'
+    '!src/index.ts'
   ],
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts'],
   testEnvironment: 'node',
