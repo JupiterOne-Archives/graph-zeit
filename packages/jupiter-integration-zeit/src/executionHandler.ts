@@ -4,11 +4,10 @@ import {
 } from '@jupiterone/jupiter-managed-integration-sdk';
 
 import { ZeitClient } from './zeit'
+import { ProjectEntity } from './jupiterone';
 
 import { createProjectEntities } from './converters';
 import initializeContext from './initializeContext';
-
-import { ProjectEntity } from './types';
 
 export default async function executionHandler(
   context: IntegrationExecutionContext
