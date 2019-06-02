@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "jupiterone-ui-hook",
+  "description": "JupiterOne Zeit Integration UI Hook",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "now dev -p 5005"
+  },
+  "dependencies": {
+    "@zeit/integration-utils": "latest"
+  },
+  "devDependencies": {
+    "now": "^15.3.0",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.4.5"
+  }
+}

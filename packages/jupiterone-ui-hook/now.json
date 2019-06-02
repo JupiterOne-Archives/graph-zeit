@@ -1,0 +1,5 @@
+{
+  "name": "jupiterone-ui-hook",
+  "version": 2,
+  "builds": [{ "src": "index.ts", "use": "@now/node" }]
+}
