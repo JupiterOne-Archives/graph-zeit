@@ -1,34 +1,30 @@
 import {
   IntegrationExecutionContext,
-  IntegrationExecutionResult
-} from '@jupiterone/jupiter-managed-integration-sdk';
+  IntegrationExecutionResult,
+} from "@jupiterone/jupiter-managed-integration-sdk";
 
-import { ZeitClient } from './zeit'
-import { ProjectEntity } from './jupiterone';
+import { fetchZeitData } from "./zeit";
 
-import { createProjectEntities } from './converters';
-import initializeContext from './initializeContext';
+import initializeContext from "./initializeContext";
 
 export default async function executionHandler(
-  context: IntegrationExecutionContext
+  context: IntegrationExecutionContext,
 ): Promise<IntegrationExecutionResult> {
   const { /*graph, persister,*/ provider } = initializeContext(context);
 
-  console.log(await fetchUserEntitiesFromProvider(provider));
+  try {
+    const newData = await fetchZeitData(provider);
+    console.log(newData);
+  } catch (err) {
+    console.error(err);
+  }
 
   return {
     operations: {
       created: 0,
       updated: 0,
-      deleted: 0
-    }
-
-    // await persister.publishPersisterOperations([])
+      deleted: 0,
+    },
   };
-}
-
-async function fetchUserEntitiesFromProvider(
-  provider: ZeitClient
-): Promise<ProjectEntity[]> {
-  return createProjectEntities(await provider.listProjects());
+  // await persister.publishPersisterOperations([])
 }

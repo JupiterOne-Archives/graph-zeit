@@ -109,11 +109,11 @@ For example, given this execution script:
 
 ```typescript
 const integrationConfig = {
-  apiToken: process.env.MYPROVIDER_LOCAL_EXECUTION_API_TOKEN
+  apiToken: process.env.MYPROVIDER_LOCAL_EXECUTION_API_TOKEN,
 };
 
 const invocationArgs = {
-  preSharedPrivateKey: process.env.MYPROVIDER_LOCAL_EXECUTION_PRIVATE_KEY
+  preSharedPrivateKey: process.env.MYPROVIDER_LOCAL_EXECUTION_PRIVATE_KEY,
 };
 ```
 

@@ -1,15 +1,15 @@
-import { createTestIntegrationExecutionContext } from '@jupiterone/jupiter-managed-integration-sdk';
+import { createTestIntegrationExecutionContext } from "@jupiterone/jupiter-managed-integration-sdk";
 
-import invocationValidator from './invocationValidator';
+import invocationValidator from "./invocationValidator";
 
-test('should reject if no api token is provided', async () => {
+test("should reject if no api token is provided", async () => {
   const context = createTestIntegrationExecutionContext({
     instance: {
-      config: {}
-    }
-  })
+      config: {},
+    },
+  });
 
-  return expect(
-    invocationValidator(context)
-  ).rejects.toThrow(/"zeitApiToken" missing/)
+  return expect(invocationValidator(context)).rejects.toThrow(
+    /"zeitApiToken" missing/,
+  );
 });
