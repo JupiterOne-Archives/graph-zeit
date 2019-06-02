@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "clean": "lerna clean --yes; rm -rf ./packages/jupiter-web/.cache",
+    "clean": "lerna clean --yes; rm -rf node_modules",
     "install": "lerna bootstrap && lerna link",
     "prettify": "prettier --write \"**/*.*\"",
     "build": "lerna run build"

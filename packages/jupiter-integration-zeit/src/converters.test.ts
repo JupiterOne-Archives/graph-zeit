@@ -7,28 +7,28 @@ import { Project } from './zeit';
 import {
   PROJECT_ENTITY_CLASS,
   PROJECT_ENTITY_TYPE
-} from './types';
+} from './jupiterone';
 
-const projects: Project[] = [
-  {
-    id: 'project1',
-    name: 'project 1',
-    accountId: 'some-uuid',
-    createdAt: Date.now(),
-    updatedAt: Date.now()
-  }
-];
+const project: Project = {
+  id: 'project1',
+  name: 'project 1',
+  accountId: 'some-uuid',
+  createdAt: Date.now(),
+  updatedAt: Date.now()
+}
 
 test('createUserEntities', () => {
-  expect(createProjectEntities(projects)).toEqual([
+  expect(createProjectEntities([project])).toEqual([
     {
       _class: PROJECT_ENTITY_CLASS,
       _type: PROJECT_ENTITY_TYPE,
-      _key: `zeit-project-${projects[0].id}`,
-      displayName: projects[0].name,
-      projectId: projects[0].id,
-      createdAt: projects[0].createdAt,
-      updatedAt: projects[0].updatedAt
+      _key: `zeit-project-${project.id}`,
+      displayName: project.name,
+      name: project.name,
+      id: project.id,
+      accountId: project.accountId,
+      createdAt: project.createdAt,
+      updatedAt: project.updatedAt
     }
   ]);
 });

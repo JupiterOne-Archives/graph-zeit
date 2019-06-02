@@ -3,7 +3,9 @@ import fetch, { RequestInit, Response } from 'node-fetch';
 // NOTE: not using import here because of type issue
 const PQueue = require('p-queue')
 
-import { Project } from './types';
+import {
+  ProjectsResponse
+} from './types';
 
 enum Method {
   GET = 'get',
@@ -81,7 +83,7 @@ export default class ZeitClient {
   }
 
   // add functions for fetching data here
-  public listProjects(): Promise<Project[]> {
+  public listProjects(): Promise<ProjectsResponse> {
     return this.makeRequest(
       '/v1/projects/list',
       Method.GET

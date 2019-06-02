@@ -4,7 +4,7 @@ import {
   PROJECT_ENTITY_CLASS,
   PROJECT_ENTITY_TYPE,
   ProjectEntity
-} from './types';
+} from './jupiterone';
 
 export const createProjectEntities = (
   data: Project[]
@@ -13,7 +13,9 @@ export const createProjectEntities = (
   _type: PROJECT_ENTITY_TYPE,
   _key: `zeit-project-${d.id}`,
   displayName: d.name,
-  projectId: d.id,
+  name: d.name,
+  id: d.id,
+  accountId: d.accountId,
   createdAt: d.createdAt,
   updatedAt: d.updatedAt
 }));
