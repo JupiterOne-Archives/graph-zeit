@@ -1,3 +1,8 @@
+/**
+ * This file converts raw data from the zeit integration into
+ * J1 entity and relationship data
+ */
+
 import {
   // Project
   ProjectEntity,

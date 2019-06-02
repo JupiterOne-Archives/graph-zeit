@@ -116,13 +116,17 @@ export async function fetchZeitData(provider: ZeitClient) {
   await Promise.all([processTeamData, processProjectData]);
 
   return {
-    projects,
-    deployments,
-    projectDeploymentRelationships,
-    teams,
-    users: [...userMap.values()],
-    userTeamRelationships,
-    domains,
-    certificates,
+    entities: {
+      projects,
+      deployments,
+      teams,
+      users: [...userMap.values()],
+      domains,
+      certificates,
+    },
+    relationships: {
+      userTeamRelationships,
+      projectDeploymentRelationships,
+    },
   };
 }
