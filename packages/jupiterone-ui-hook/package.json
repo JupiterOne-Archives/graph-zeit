@@ -8,7 +8,9 @@
     "dev": "now dev -p 5005"
   },
   "dependencies": {
-    "@zeit/integration-utils": "latest"
+    "@jupiterone/jupiterone-client-nodejs": "0.11.3",
+    "@zeit/integration-utils": "latest",
+    "graphviz": "0.0.9"
   },
   "devDependencies": {
     "now": "^15.3.0",
