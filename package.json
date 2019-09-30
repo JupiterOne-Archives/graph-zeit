@@ -46,5 +46,8 @@
   },
   "hooks": {
     "pre-commit": "lint-staged"
+  },
+  "dependencies": {
+    "@jupiterone/jupiter-managed-integration-sdk": "25.0.0-secretsmanager.0"
   }
 }
