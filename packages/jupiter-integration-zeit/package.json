@@ -1,5 +1,5 @@
 {
-  "name": "@jupiterone/jupiter-integration-zeit",
+  "name": "@jupiterone/graph-zeit",
   "description": "An integration for Zeit",
   "license": "SEE LICENSE IN LICENSE",
   "repository": "https://github.com/JupiterOne/jupiter-integration-zeit",
